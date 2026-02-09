@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>sharpfmt</ToolCommandName>
+    <PackageId>dotnet-sharpfmt</PackageId>
+    <Version>0.1.0</Version>
+    <Description>Fast C# formatter for changed lines only. Like git-clang-format, but for C# with .editorconfig support.</Description>
+    <RootNamespace>SharpFmt</RootNamespace>
+    <AssemblyName>SharpFmt</AssemblyName>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <InternalsVisibleTo Include="SharpFmt.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.9.2" />
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+    <PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>
