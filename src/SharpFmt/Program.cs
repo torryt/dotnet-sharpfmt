@@ -97,6 +97,7 @@ public static class Program
         {
             formatFilesArgument,
             linesOption,
+            noExpandOption,
             checkOption,
             diffOption,
             verbosityOption,
@@ -108,6 +109,7 @@ public static class Program
             {
                 Files = context.ParseResult.GetValueForArgument(formatFilesArgument),
                 Lines = context.ParseResult.GetValueForOption(linesOption) ?? Array.Empty<string>(),
+                NoExpand = context.ParseResult.GetValueForOption(noExpandOption),
                 Check = context.ParseResult.GetValueForOption(checkOption),
                 Diff = context.ParseResult.GetValueForOption(diffOption),
                 Verbosity = context.ParseResult.GetValueForOption(verbosityOption),

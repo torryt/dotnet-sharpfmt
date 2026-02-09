@@ -159,7 +159,7 @@ public sealed class FormattingPipeline
                 return 2;
             }
 
-            var result = formatter.Format(file, ranges.Count > 0 ? ranges : null);
+            var result = formatter.Format(file, ranges.Count > 0 ? ranges : null, options.NoExpand);
             results.Add(result);
         }
 
