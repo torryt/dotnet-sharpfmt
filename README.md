@@ -1,8 +1,10 @@
 # dotnet-sharpfmt
 
-Fast C# formatter for changed lines only. Like `git clang-format`, but for C#.
+Fast C# formatter for changed lines only. Like `git clang-format`, but for C#. Because apparently `dotnet format` taking 15 seconds to tell you about a missing space was a problem that needed solving.
 
-`sharpfmt` uses Roslyn to format **only the lines you changed** — no MSBuild, no NuGet restore, no project files required. It reads `.editorconfig` for formatting rules and runs in under a second on typical PRs.
+`sharpfmt` uses Roslyn to format **only the lines you changed** — no MSBuild, no NuGet restore, no project files required. It reads `.editorconfig` for formatting rules and runs in under a second on typical PRs. Yes, under a second. No, we don't know how either.
+
+> **Disclaimer:** This tool is **100% vibe coded**. A human mass-approved AI-generated code while sipping coffee. The test suite passes — all 123 tests, written by AI, reviewed by AI, approved by a human clicking "Looks good to me" with the confidence of someone who definitely understands every line. (They don't.) If you find a bug, congratulations — you've read more of the source code than the maintainer.
 
 ## Installation
 
@@ -10,7 +12,7 @@ Fast C# formatter for changed lines only. Like `git clang-format`, but for C#.
 dotnet tool install -g dotnet-sharpfmt
 ```
 
-Or as a local tool:
+Or as a local tool, if you have trust issues with global installs (fair):
 
 ```bash
 dotnet new tool-manifest   # if you don't have one yet
@@ -46,7 +48,7 @@ sharpfmt abc1234
 3. Formats only those spans using `Roslyn Formatter.Format()` with your `.editorconfig` settings
 4. Writes the result back (or reports via `--check`/`--diff`)
 
-Because it skips MSBuild project loading, NuGet restore, and semantic analysis entirely, it's **fast** — typically under 1 second for a PR touching 20+ files.
+Because it skips MSBuild project loading, NuGet restore, and semantic analysis entirely, it's **fast** — typically under 1 second for a PR touching 20+ files. Your colleague's 200-file "small refactor" PR? Still under 2 seconds. The tool is faster than your code review, which, let's be honest, was just scrolling to the bottom and clicking approve.
 
 ## Commands
 
@@ -56,7 +58,7 @@ Because it skips MSBuild project loading, NuGet restore, and semantic analysis e
 sharpfmt [<commit>] [options]
 ```
 
-Formats lines that changed between your working tree (or staging area) and the given commit.
+Formats lines that changed between your working tree (or staging area) and the given commit. You know, the thing you wish `dotnet format` did instead of reformatting your entire codebase and blaming you in the diff.
 
 | Option | Description |
 |--------|-------------|
@@ -76,7 +78,7 @@ Formats lines that changed between your working tree (or staging area) and the g
 sharpfmt format <files...> [options]
 ```
 
-Format specific files directly, without git integration.
+Format specific files directly, without git integration. For when you just want to format a file and not get into a philosophical debate about what "changed" means.
 
 | Option | Description |
 |--------|-------------|
@@ -101,16 +103,18 @@ sharpfmt format src/MyClass.cs --lines=10:25 --lines=40:60
 | 1 | `--check`/`--diff` mode: formatting changes would be needed |
 | 2 | Error (git failure, parse error, etc.) |
 
+Exit code 2 means something went actually wrong. If you're seeing it a lot, maybe the problem isn't the tool.
+
 ## `.editorconfig` Support
 
-`sharpfmt` reads `.editorconfig` files the same way the C# compiler does (via Roslyn's `AnalyzerConfigSet`). It respects `root = true` and supports the following options:
+`sharpfmt` reads `.editorconfig` files the same way the C# compiler does (via Roslyn's `AnalyzerConfigSet`). It respects `root = true` and supports a frankly unreasonable number of options:
 
 **General:**
-- `indent_style` (space/tab)
+- `indent_style` (space/tab) — pick a side, we don't judge. Actually, we do. Spaces.
 - `indent_size`
 - `tab_width`
 
-**C# spacing** (20 options):
+**C# spacing** (20 options, because apparently braces need personal space):
 - `csharp_space_after_cast`, `csharp_space_after_comma`, `csharp_space_after_dot`
 - `csharp_space_after_semicolon_in_for_statement`, `csharp_space_before_comma`, `csharp_space_before_dot`
 - `csharp_space_before_semicolon_in_for_statement`
@@ -143,6 +147,8 @@ sharpfmt format src/MyClass.cs --lines=10:25 --lines=40:60
 
 ## CI Integration
 
+Because nothing says "team culture" like blocking PRs over a missing space before a brace.
+
 ### GitHub Actions
 
 ```yaml
@@ -163,7 +169,7 @@ sharpfmt format src/MyClass.cs --lines=10:25 --lines=40:60
 
 ### Pre-commit Hook
 
-Add to `.git/hooks/pre-commit`:
+Add to `.git/hooks/pre-commit` if you enjoy being told "no" by your own computer:
 
 ```bash
 #!/bin/sh
@@ -194,14 +200,16 @@ repos:
 | Semantic analysis | Yes | No |
 | Style rules (use var, etc.) | Yes | No |
 | Whitespace/formatting rules | Yes | Yes |
+| Vibe coded | Probably not | Absolutely |
 
-`sharpfmt` is designed as a complement to `dotnet format` — use `sharpfmt` for fast pre-commit and CI formatting checks, and `dotnet format` for full style enforcement when you need semantic analysis.
+`sharpfmt` is designed as a complement to `dotnet format` — use `sharpfmt` for fast pre-commit and CI formatting checks, and `dotnet format` for full style enforcement when you need semantic analysis. Or, you know, use both and let the robots fight over your indentation.
 
 ## Requirements
 
 - .NET 9.0 or later
 - Git (for the default git-diff mode; not needed for `sharpfmt format`)
+- A willingness to trust code that no human has fully read
 
 ## License
 
-MIT
+MIT — because even vibe-coded software deserves freedom.
