@@ -4,7 +4,7 @@ Fast C# formatter for changed lines only. Like `git clang-format`, but for C#. B
 
 `sharpfmt` uses Roslyn to format **only the lines you changed** — no MSBuild, no NuGet restore, no project files required. It reads `.editorconfig` for formatting rules and runs in under a second on typical PRs. Yes, under a second. No, we don't know how either.
 
-> **Disclaimer:** This tool is **100% vibe coded**. A human mass-approved AI-generated code while sipping coffee. The test suite passes — all 123 tests, written by AI, reviewed by AI, approved by a human clicking "Looks good to me" with the confidence of someone who definitely understands every line. (They don't.) If you find a bug, congratulations — you've read more of the source code than the maintainer.
+> **Disclaimer:** This tool is **100% vibe coded**. A human mass-approved AI-generated code while sipping coffee. The test suite passes — all 123 tests, written by AI, reviewed by AI, approved by a human clicking "Looks good to me" with the confidence of someone who definitely understands every line. (They don't.) If you find a bug, congratulations — you've read more of the source code than the maintainer. Oh, and the jokes in this README? Also AI-generated. The human couldn't even be bothered to write their own sarcasm.
 
 ## Installation
 
