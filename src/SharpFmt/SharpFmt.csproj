@@ -10,10 +10,23 @@
     <RootNamespace>SharpFmt</RootNamespace>
     <AssemblyName>SharpFmt</AssemblyName>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+
+    <!-- NuGet package metadata -->
+    <Authors>Torry Tufteland</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/torryt/dotnet-sharpfmt</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/torryt/dotnet-sharpfmt</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>csharp;formatter;roslyn;editorconfig;dotnet-tool;git</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <InternalsVisibleTo Include="SharpFmt.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
   </ItemGroup>
 
   <ItemGroup>
